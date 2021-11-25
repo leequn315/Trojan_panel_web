@@ -53,7 +53,7 @@ if test -s /etc/systemd/system/trojan-web.service; then
 	systemctl stop nginx
 if test -s /etc/nginx/nginx.conf; then
 	rm -rf /etc/nginx/nginx.conf
-  wget -P /etc/nginx https://raw.githubusercontent.com/V2RaySSR/Trojan_panel_web/master/nginx.conf
+  wget -P /etc/nginx https://raw.githubusercontent.com/leequn315/Trojan_panel_web/master/nginx.conf
 	green "================================="
 	blue "     请输入Trojan绑定的域名"
 	green "================================="
@@ -66,15 +66,15 @@ if test -s /etc/nginx/nginx.conf; then
 	sleep 2s
 	rm -rf /usr/share/nginx/html/*
 	cd /usr/share/nginx/html/
-	wget https://github.com/V2RaySSR/Trojan/raw/master/web.zip
-	unzip web.zip
+	# wget https://github.com/V2RaySSR/Trojan/raw/master/web.zip
+	# unzip web.zip
 	green " "
 	green "================================="
 	blue "       开始配置trojan-web"
 	green "================================="
 	sleep 2s
-  sed -i '/ExecStart/s/trojan web -p 81/trojan web/g' /etc/systemd/system/trojan-web.service
-  sed -i '/ExecStart/s/trojan web/trojan web -p 81/g' /etc/systemd/system/trojan-web.service
+  sed -i '/ExecStart/s/trojan web -p 8182/trojan web/g' /etc/systemd/system/trojan-web.service
+  sed -i '/ExecStart/s/trojan web/trojan web -p 8182/g' /etc/systemd/system/trojan-web.service
   systemctl daemon-reload
   systemctl restart trojan-web
   systemctl restart nginx
@@ -109,12 +109,12 @@ fi
 
 bbr_boost_sh(){
     $systemPackage install -y wget
-    wget -N --no-check-certificate -q -O tcp.sh "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh && bash tcp.sh
+    wget -N --no-check-certificate -q -O tcp.sh "https://raw.githubusercontent.com/leequn315/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh && bash tcp.sh
 }
 
 trojan_install(){
     $systemPackage install -y curl
-		source <(curl -sL https://git.io/trojan-install)
+		source <(curl -sL https://raw.githubusercontent.com/leequn315/trojan/master/install.sh)
 }
 
 start_menu(){
