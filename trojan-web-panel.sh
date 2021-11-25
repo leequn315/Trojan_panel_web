@@ -68,12 +68,13 @@ if test -s /etc/nginx/nginx.conf; then
 	cd /usr/share/nginx/html/
 	# wget https://github.com/V2RaySSR/Trojan/raw/master/web.zip
 	# unzip web.zip
+	echo "<html><head><title>Congratulations</title></head><body><br><br><p align=center><font size=14>The site was created successfully</font></p></body></html>" >/usr/share/nginx/html/index.html
 	green " "
 	green "================================="
 	blue "       开始配置trojan-web"
 	green "================================="
 	sleep 2s
-	read -p "请输入trojan-web端口号:1-65535" portnum	
+	read -p "请输入trojan-web端口号[1-65535]:" portnum	
   	sed -i "/ExecStart/s/trojan web -p $portnum/trojan web/g" /etc/systemd/system/trojan-web.service
   	sed -i "/ExecStart/s/trojan web/trojan web -p $portnum/g" /etc/systemd/system/trojan-web.service
   systemctl daemon-reload
