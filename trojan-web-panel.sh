@@ -73,8 +73,9 @@ if test -s /etc/nginx/nginx.conf; then
 	blue "       开始配置trojan-web"
 	green "================================="
 	sleep 2s
-  sed -i '/ExecStart/s/trojan web -p 8182/trojan web/g' /etc/systemd/system/trojan-web.service
-  sed -i '/ExecStart/s/trojan web/trojan web -p 8182/g' /etc/systemd/system/trojan-web.service
+	read -p "请输入trojan-web端口号:1-65535" portnum	
+  	sed -i "/ExecStart/s/trojan web -p $portnum/trojan web/g" /etc/systemd/system/trojan-web.service
+  	sed -i "/ExecStart/s/trojan web/trojan web -p $portnum/g" /etc/systemd/system/trojan-web.service
   systemctl daemon-reload
   systemctl restart trojan-web
   systemctl restart nginx
@@ -89,7 +90,7 @@ if test -s /etc/nginx/nginx.conf; then
 	 blue "  脚本交流电报群：https://goii.cc/tg"
 	green " "
 	 blue "  伪装站点目录 /usr/share/nginx/html "
-	 blue "  面板管理地址 http://$your_domain:81 "
+	 blue "  面板管理地址 http://$your_domain:$portnum "
 	green "=================================================================="
 else
 	green "==============================="
